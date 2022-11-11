@@ -6,13 +6,13 @@ body {
 .assignments {
     display:flex;
     flex-wrap:wrap;
+    padding:20px 10px;
 }
 
 .assignment {
     width:25%;
     padding:15px;
     margin:10px;
-    padding:20px 10px;
     background:#9FA1E7;
     border-radius:10px;
 }
