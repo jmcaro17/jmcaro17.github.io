@@ -1,11 +1,13 @@
 ## Status Code: SUCCESS 200 (with authorization)
 
 ### Query:
+```
 query {
   getAllClients { clientId }
 }
-
+```
 ### Response:
+```
 {
   "data": {
     "getAllClients": [
@@ -21,33 +23,43 @@ query {
     ]
   }
 }
+```
 
 ### Mutation: (with authorization)
+```
 mutation ($input: CreateClientSubscriptionInput!) {
   subscribeClientToModel(input: $input)
 }
+```
 
 Query Variables:
+```
 { "input": { "modelId": 1, "clientId": 1 } }
+```
 
 ### Response:
+```
 {
   "data": {
     "subscribeClientToModel": true
   }
 }
+```
 
 ## Status Code: BAD_REQUEST 400
 
 ### Query:
+```
 query BadDates {
   svAlertsByDateRange(startDate: "not-a-date", endDate: "2024-01-01") {
     alertId
     remark
   }
 }
+```
 
 ### Response:
+```
 {
   "errors": [
     {
@@ -79,8 +91,10 @@ query BadDates {
   ],
   "data": null
 }
+```
 
 ### Sugested response:
+```
 {
   "errors": [
     {
@@ -95,17 +109,21 @@ query BadDates {
   ],
   "data": null
 }
+```
 
 ## Status Code: AUTHENTICATION_ERROR 401
 
 ### Query:
+```
 query {
   getAllClients {
     clientId
   }
 }
+```
 
 ### Response:
+```
 {
   "errors": [
     {
@@ -144,21 +162,27 @@ query {
   ],
   "data": null
 }
+```
 
 ### Mutation:
+```
 mutation Login($data: LoginDto!) {
   login(data: $data)
 }
+```
 
 query variables:
+```
 {
   "data": {
     "email": "test.user@gmail.com",
     "password": "wrongpassword"
   }
 }
+```
 
 ### Response:
+```
 {
   "errors": [
     {
@@ -192,32 +216,39 @@ query variables:
   ],
   "data": null
 }
+```
 
 # TO-DO:
 ## Status Code: FORBIDDEN 403 (client not admin)
 
 ### Query:
+```
 query {
   getAllClients { clientId }
 }
+```
 
 ### Response:
 
 
 ### Mutation:
+```
 mutation ($input: CreateClientSubscriptionInput!) {
   subscribeClientToModel(input: $input)
 }
+```
 
 query variables:
+```
 { "input": { "modelId": 1, "clientId": 1 } }
-
+```
 ### Response:
 
 
 ## Status Code: NOT FOUND 404
 
 ### Query:
+```
 query MissingAlert {
   svAlert(
     modelId: 999999
@@ -233,8 +264,10 @@ query MissingAlert {
     remark
   }
 }
+```
 
 ### Response:
+```
 {
   "errors": [
     {
@@ -262,10 +295,12 @@ query MissingAlert {
   ],
   "data": null
 }
+```
 
 ## This can be improved:
 
 ### Current form:
+```
 {
   "errors": [
     {
@@ -276,9 +311,10 @@ query MissingAlert {
   ],
   "data": null
 }
-
+```
 
 ### Suggested form:
+```
 {
   "errors": [
     {
@@ -294,8 +330,10 @@ query MissingAlert {
   ],
   "data": null
 }
+```
 
 ### Mutation:
+```
 mutation BadModelId {
   subscribeToModel(modelId: -1)
 }
@@ -306,8 +344,10 @@ mutation BadModelId {
     "subscribeToModel": false
   }
 }
+```
 
 ### Mutation:
+```
 mutation UnsubMissing {
   unsubscribeFromModel(modelId: -1200)
 }
@@ -318,17 +358,21 @@ mutation UnsubMissing {
     "unsubscribeFromModel": true
   }
 }
+```
 
 ### Show standard form above?
 
 ## Status Code: INTERNAL_SERVER_ERROR 500
 
 ### Query:
+```
 query {
   getAllClients { clientId }
 }
+```
 
 ### Response:
+```
 {
   "errors": [
     {
@@ -353,8 +397,10 @@ query {
   ],
   "data": null
 }
+```
 
 ### Suggested form:
+```
 {
   "errors": [
     {
@@ -369,3 +415,4 @@ query {
   ],
   "data": null
 }
+```
