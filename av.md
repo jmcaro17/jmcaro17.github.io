@@ -1,11 +1,11 @@
-// Status Code: SUCCESS 200 (with authorization)
+## Status Code: SUCCESS 200 (with authorization)
 
-/// Query:
+### Query:
 query {
   getAllClients { clientId }
 }
 
-/// Response:
+### Response:
 {
   "data": {
     "getAllClients": [
@@ -22,7 +22,7 @@ query {
   }
 }
 
-/// Mutation: (with authorization)
+### Mutation: (with authorization)
 mutation ($input: CreateClientSubscriptionInput!) {
   subscribeClientToModel(input: $input)
 }
@@ -30,16 +30,16 @@ mutation ($input: CreateClientSubscriptionInput!) {
 Query Variables:
 { "input": { "modelId": 1, "clientId": 1 } }
 
-/// Response:
+### Response:
 {
   "data": {
     "subscribeClientToModel": true
   }
 }
 
-// Status Code: BAD_REQUEST 400
+## Status Code: BAD_REQUEST 400
 
-/// Query:
+### Query:
 query BadDates {
   svAlertsByDateRange(startDate: "not-a-date", endDate: "2024-01-01") {
     alertId
@@ -47,7 +47,7 @@ query BadDates {
   }
 }
 
-/// Response:
+### Response:
 {
   "errors": [
     {
@@ -65,14 +65,14 @@ query BadDates {
         "code": "INTERNAL_SERVER_ERROR",
         "stacktrace": [
           "QueryFailedError: invalid input syntax for type date: \"0NaN-NaN-NaNTNaN:NaN:NaN.NaN+NaN:NaN\"",
-          "    at PostgresQueryRunner.query (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/typeorm/driver/src/driver/postgres/PostgresQueryRunner.ts:325:19)",
-          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
-          "    at async SelectQueryBuilder.loadRawResults (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/typeorm/query-builder/src/query-builder/SelectQueryBuilder.ts:3808:25)",
-          "    at async SelectQueryBuilder.executeEntitiesAndRawResults (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/typeorm/query-builder/src/query-builder/SelectQueryBuilder.ts:3554:26)",
-          "    at async SelectQueryBuilder.getRawAndEntities (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/typeorm/query-builder/src/query-builder/SelectQueryBuilder.ts:1671:29)",
-          "    at async SelectQueryBuilder.getMany (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/typeorm/query-builder/src/query-builder/SelectQueryBuilder.ts:1761:25)",
-          "    at async target (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
-          "    at async Object.svAlertsByDateRange (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+          "    at PostgresQueryRunner.query (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#typeorm#driver#src#driver#postgres#PostgresQueryRunner.ts:325:19)",
+          "    at process.processTicksAndRejections (node:internal#process#task_queues:105:5)",
+          "    at async SelectQueryBuilder.loadRawResults (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#typeorm#query-builder#src#query-builder#SelectQueryBuilder.ts:3808:25)",
+          "    at async SelectQueryBuilder.executeEntitiesAndRawResults (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#typeorm#query-builder#src#query-builder#SelectQueryBuilder.ts:3554:26)",
+          "    at async SelectQueryBuilder.getRawAndEntities (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#typeorm#query-builder#src#query-builder#SelectQueryBuilder.ts:1671:29)",
+          "    at async SelectQueryBuilder.getMany (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#typeorm#query-builder#src#query-builder#SelectQueryBuilder.ts:1761:25)",
+          "    at async target (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-context-creator.js:74:28)",
+          "    at async Object.svAlertsByDateRange (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-proxy.js:9:24)"
         ]
       }
     }
@@ -80,7 +80,7 @@ query BadDates {
   "data": null
 }
 
-/// Sugested response:
+### Sugested response:
 {
   "errors": [
     {
@@ -96,16 +96,16 @@ query BadDates {
   "data": null
 }
 
-// Status Code: AUTHENTICATION_ERROR 401
+## Status Code: AUTHENTICATION_ERROR 401
 
-/// Query:
+### Query:
 query {
   getAllClients {
     clientId
   }
 }
 
-/// Response:
+### Response:
 {
   "errors": [
     {
@@ -123,16 +123,16 @@ query {
         "code": "UNAUTHENTICATED",
         "stacktrace": [
           "UnauthorizedException: Authentication failed. Please provide a valid token.",
-          "    at JwtAuthGuard.handleRequest (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/src/auth/jwt-auth.guard.ts:15:13)",
-          "    at /Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/passport/dist/auth.guard.js:44:124",
-          "    at /Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/passport/dist/auth.guard.js:83:24",
-          "    at allFailed (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport/lib/middleware/authenticate.js:110:18)",
-          "    at attempt (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport/lib/middleware/authenticate.js:183:28)",
-          "    at strategy.fail (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport/lib/middleware/authenticate.js:314:9)",
-          "    at /Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport-jwt/lib/strategy.js:106:33",
-          "    at module.exports [as verify] (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/jsonwebtoken/verify.js:70:12)",
-          "    at module.exports [as JwtVerifier] (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport-jwt/lib/verify_jwt.js:4:16)",
-          "    at /Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/passport-jwt/lib/strategy.js:104:25"
+          "    at JwtAuthGuard.handleRequest (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#src#auth#jwt-auth.guard.ts:15:13)",
+          "    at #Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#passport#dist#auth.guard.js:44:124",
+          "    at #Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#passport#dist#auth.guard.js:83:24",
+          "    at allFailed (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport#lib#middleware#authenticate.js:110:18)",
+          "    at attempt (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport#lib#middleware#authenticate.js:183:28)",
+          "    at strategy.fail (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport#lib#middleware#authenticate.js:314:9)",
+          "    at #Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport-jwt#lib#strategy.js:106:33",
+          "    at module.exports [as verify] (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#jsonwebtoken#verify.js:70:12)",
+          "    at module.exports [as JwtVerifier] (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport-jwt#lib#verify_jwt.js:4:16)",
+          "    at #Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#passport-jwt#lib#strategy.js:104:25"
         ],
         "originalError": {
           "message": "Authentication failed. Please provide a valid token.",
@@ -145,7 +145,7 @@ query {
   "data": null
 }
 
-/// Mutation:
+### Mutation:
 mutation Login($data: LoginDto!) {
   login(data: $data)
 }
@@ -158,7 +158,7 @@ query variables:
   }
 }
 
-/// Response:
+### Response:
 {
   "errors": [
     {
@@ -176,11 +176,11 @@ query variables:
         "code": "UNAUTHENTICATED",
         "stacktrace": [
           "UnauthorizedException: Invalid credentials",
-          "    at AuthService.login (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/src/auth/auth.service.ts:34:13)",
-          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
-          "    at async AuthResolver.login (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/src/auth/auth.resolver.ts:15:20)",
-          "    at async target (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
-          "    at async Object.login (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+          "    at AuthService.login (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#src#auth#auth.service.ts:34:13)",
+          "    at process.processTicksAndRejections (node:internal#process#task_queues:105:5)",
+          "    at async AuthResolver.login (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#src#auth#auth.resolver.ts:15:20)",
+          "    at async target (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-context-creator.js:74:28)",
+          "    at async Object.login (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-proxy.js:9:24)"
         ],
         "originalError": {
           "message": "Invalid credentials",
@@ -193,18 +193,18 @@ query variables:
   "data": null
 }
 
-/ TO-DO:
-// Status Code: FORBIDDEN 403 (client not admin)
+# TO-DO:
+## Status Code: FORBIDDEN 403 (client not admin)
 
-/// Query:
+### Query:
 query {
   getAllClients { clientId }
 }
 
-/// Response:
+### Response:
 
 
-/// Mutation:
+### Mutation:
 mutation ($input: CreateClientSubscriptionInput!) {
   subscribeClientToModel(input: $input)
 }
@@ -212,12 +212,12 @@ mutation ($input: CreateClientSubscriptionInput!) {
 query variables:
 { "input": { "modelId": 1, "clientId": 1 } }
 
-/// Response:
+### Response:
 
 
-// Status Code: NOT FOUND 404
+## Status Code: NOT FOUND 404
 
-/// Query:
+### Query:
 query MissingAlert {
   svAlert(
     modelId: 999999
@@ -234,7 +234,7 @@ query MissingAlert {
   }
 }
 
-/// Response:
+### Response:
 {
   "errors": [
     {
@@ -252,10 +252,10 @@ query MissingAlert {
         "code": "INTERNAL_SERVER_ERROR",
         "stacktrace": [
           "Error: Alert not found",
-          "    at SvAlertService.findOne (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/src/services/sv-alert.service.ts:44:13)",
-          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
-          "    at async target (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
-          "    at async Object.svAlert (/Users/jessecaro/Desktop/AerialView/repo/aerialview-ui-backend/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+          "    at SvAlertService.findOne (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#src#services#sv-alert.service.ts:44:13)",
+          "    at process.processTicksAndRejections (node:internal#process#task_queues:105:5)",
+          "    at async target (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-context-creator.js:74:28)",
+          "    at async Object.svAlert (#Users#jessecaro#Desktop#AerialView#repo#aerialview-ui-backend#node_modules#@nestjs#core#helpers#external-proxy.js:9:24)"
         ]
       }
     }
@@ -263,9 +263,9 @@ query MissingAlert {
   "data": null
 }
 
-// This can be improved:
+## This can be improved:
 
-/// Current form:
+### Current form:
 {
   "errors": [
     {
@@ -278,7 +278,7 @@ query MissingAlert {
 }
 
 
-/// Suggested form:
+### Suggested form:
 {
   "errors": [
     {
@@ -295,40 +295,40 @@ query MissingAlert {
   "data": null
 }
 
-/// Mutation:
+### Mutation:
 mutation BadModelId {
   subscribeToModel(modelId: -1)
 }
 
-/// Response:
+### Response:
 {
   "data": {
     "subscribeToModel": false
   }
 }
 
-/// Mutation:
+### Mutation:
 mutation UnsubMissing {
   unsubscribeFromModel(modelId: -1200)
 }
 
-/// Response:
+### Response:
 {
   "data": {
     "unsubscribeFromModel": true
   }
 }
 
-/// Show standard form above?
+### Show standard form above?
 
-// Status Code: INTERNAL_SERVER_ERROR 500
+## Status Code: INTERNAL_SERVER_ERROR 500
 
-/// Query:
+### Query:
 query {
   getAllClients { clientId }
 }
 
-/// Response:
+### Response:
 {
   "errors": [
     {
@@ -354,7 +354,7 @@ query {
   "data": null
 }
 
-/// Suggested form:
+### Suggested form:
 {
   "errors": [
     {
