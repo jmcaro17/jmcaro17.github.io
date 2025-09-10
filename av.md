@@ -337,8 +337,10 @@ query MissingAlert {
 mutation BadModelId {
   subscribeToModel(modelId: -1)
 }
+```
 
 ### Response:
+```
 {
   "data": {
     "subscribeToModel": false
@@ -351,8 +353,10 @@ mutation BadModelId {
 mutation UnsubMissing {
   unsubscribeFromModel(modelId: -1200)
 }
+```
 
 ### Response:
+```
 {
   "data": {
     "unsubscribeFromModel": true
