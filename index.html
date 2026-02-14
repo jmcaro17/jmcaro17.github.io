@@ -6,9 +6,15 @@
 <title>Be My Valentine?</title>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+
     body {
         margin: 0;
         padding: 0;
+        min-width: 1200px;
+        min-height: 600px;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -16,11 +22,33 @@
         font-family: Arial, sans-serif;
         background: linear-gradient(135deg, #ff9a9e, #fecfef);
         overflow: hidden;
-        text-align: center;
+        position: relative;
+    }
+
+    /* Floating hearts background */
+    .heart {
+        position: absolute;
+        bottom: -50px;
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.7);
+        animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-110vh);
+            opacity: 0;
+        }
     }
 
     .container {
         position: relative;
+        text-align: center;
+        z-index: 2;
     }
 
     h1 {
@@ -32,8 +60,9 @@
 
     .buttons {
         position: relative;
-        width: 400px;
-        height: 200px;
+        width: 600px;
+        height: 250px;
+        margin: auto;
     }
 
     button {
@@ -47,8 +76,8 @@
     }
 
     #yesBtn {
-        left: 60px;
-        top: 70px;
+        left: 150px;
+        top: 100px;
         background-color: #ff4d6d;
         color: white;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -59,8 +88,8 @@
     }
 
     #noBtn {
-        left: 220px;
-        top: 70px;
+        left: 350px;
+        top: 100px;
         background-color: #555;
         color: white;
     }
@@ -70,10 +99,12 @@
         flex-direction: column;
         align-items: center;
         color: white;
+        z-index: 2;
+        text-align: center;
     }
 
     .celebration img {
-        width: 300px;
+        width: 350px;
         border-radius: 20px;
         margin-top: 20px;
     }
@@ -84,7 +115,7 @@
 
 <div class="container" id="mainContent">
     <h1>Will You Be My Valentine? ❤️</h1>
-    <div class="buttons">
+    <div class="buttons" id="buttonArea">
         <button id="yesBtn">Yes 💖</button>
         <button id="noBtn">No 😢</button>
     </div>
@@ -92,18 +123,21 @@
 
 <div class="celebration" id="celebration">
     <h1>YAY!!! 🎉💘</h1>
-    <img src="https://media.tenor.com/5uQGkTn_1u4AAAAC/spongebob-patrick-star.gif" alt="Celebration">
+    <img src="https://media.tenor.com/5uQGkTn_1u4AAAAC/spongebob-patrick-star.gif">
 </div>
 
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+    const buttonArea = document.getElementById("buttonArea");
     const mainContent = document.getElementById("mainContent");
     const celebration = document.getElementById("celebration");
 
     function moveButton() {
-        const maxX = window.innerWidth - noBtn.offsetWidth;
-        const maxY = window.innerHeight - noBtn.offsetHeight;
+        const areaRect = buttonArea.getBoundingClientRect();
+
+        const maxX = areaRect.width - noBtn.offsetWidth;
+        const maxY = areaRect.height - noBtn.offsetHeight;
 
         const randomX = Math.random() * maxX;
         const randomY = Math.random() * maxY;
@@ -118,6 +152,25 @@
         mainContent.style.display = "none";
         celebration.style.display = "flex";
     });
+
+    /* Generate floating hearts */
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+        heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 10000);
+    }
+
+    setInterval(createHeart, 300);
 </script>
 
 </body>
