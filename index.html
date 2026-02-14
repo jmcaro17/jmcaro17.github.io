@@ -1,104 +1,124 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>CSCE 190: Jesse Caro</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <h1>Jesse Caro's CSCE 190 Site</h1>
-        
-        <div class="assignments">
-            <!-- Problem Statement Assignment-->
-            <section class ="assignment">
-                <a href="files/Runtime Terrorizers CSCE 190 Team Sheet.pdf">
-                    <h2>Problem Statement</h2>
-                </a>
-                <a href="files/Runtime Terrorizers CSCE 190 Team Sheet.pdf">
-                    <img src="images/problem_statement_screenshot.png">
-                </a>
-                <p>
-                    Students come to school looking for friends and trying to find people with similar classes and schedules. 
-                </p>
-            </section>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
 
-             <!-- Affinity Diagram Assignment-->
-             <section class ="assignment">
-                <a href="files/Runtime Terrorizers - Affinity Diagram.pdf">
-                    <h2>Affinity Diagram</h2>
-                </a>
-                <a href="files/Runtime Terrorizers - Affinity Diagram.pdf">
-                    <img src="images/affinity_diagram_screenshot.png">
-                </a>
-                <p>
-                    My group and I brainstormed all our ideas for our all in one app for school.
-                </p>
-            </section>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        overflow: hidden;
+        text-align: center;
+    }
 
-            <!-- Personas Assignment-->
-            <section class ="assignment">
-                <a href="files/Runtime Terrorizers - Personas.pdf">
-                    <h2>Personas</h2>
-                </a>
-                <a href="files/Runtime Terrorizers - Personas.pdf">
-                    <img src="images/persona_screenshot.png">
-                </a>
-                <p>
-                    Five personas of typical users for our all in one app for school.
-                </p>
-            </section>
+    .container {
+        position: relative;
+    }
 
-            <!-- Storyboard Assignment-->
-            <section class ="assignment">
-                <a href="files/Runtime Terrorizers Storyboard Combined.pdf">
-                    <h2>Storyboard</h2>
-                </a>
-                <a href="files/Runtime Terrorizers Storyboard Combined.pdf">
-                    <img src="images/storyboard_screenshot.png">
-                </a>
-                <p>
-                    Stories of how our five personas of typical users of our all in one app would use it.
-                </p>
-            </section>
+    h1 {
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    }
 
-            <!-- Sketches Assignment-->
-            <section class ="assignment">
-                <a href="files/Runtime Terrorizers - Sketches.pdf">
-                    <h2>Sketches</h2>
-                </a>
-                <a href="files/Runtime Terrorizers - Sketches.pdf">
-                    <img src="images/skeches_screenshot.png">
-                </a>
-                <p>
-                    Rough ideas of how the app may look.
-                </p>
-            </section>
+    .buttons {
+        position: relative;
+        width: 400px;
+        height: 200px;
+    }
 
-            <!-- Paper Prototype Assignment-->
-            <section class ="assignment">
-                <a href="https://www.youtube.com/watch?v=sHh3nb0GKdA&ab_channel=AlexBrown">
-                    <h2>Paper Prototype</h2>
-                </a>
-                <a href="https://www.youtube.com/watch?v=sHh3nb0GKdA&ab_channel=AlexBrown">
-                    <img src="images/paper_prototype_screenshot.png">
-                </a>
-                <p>
-                    A paper walkthrough of the potential look of every screen in the application.
-                </p>
-            </section>
+    button {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.2s ease;
+        position: absolute;
+    }
 
-            <!-- Hi-Fi Prototype Assignment-->
-            <section class ="assignment">
-                <a href="files/Schmeet!-html/preview.html">
-                    <h2>Hi-Fi Prototype</h2>
-                </a>
-                <a href="files/Schmeet!-html/preview.html">
-                    <img src="images/hifi_prototype_screenshot.png">
-                </a>
-                <p>
-                    A high fidelity prototype that simulates the feel and look of our app experience.
-                </p>
-            </section>
+    #yesBtn {
+        left: 60px;
+        top: 70px;
+        background-color: #ff4d6d;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
 
-        <div>
-    </body>
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        left: 220px;
+        top: 70px;
+        background-color: #555;
+        color: white;
+    }
+
+    .celebration {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+    }
+
+    .celebration img {
+        width: 300px;
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+    <h1>Will You Be My Valentine? ❤️</h1>
+    <div class="buttons">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+</div>
+
+<div class="celebration" id="celebration">
+    <h1>YAY!!! 🎉💘</h1>
+    <img src="https://media.tenor.com/5uQGkTn_1u4AAAAC/spongebob-patrick-star.gif" alt="Celebration">
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const mainContent = document.getElementById("mainContent");
+    const celebration = document.getElementById("celebration");
+
+    function moveButton() {
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveButton);
+
+    yesBtn.addEventListener("click", () => {
+        mainContent.style.display = "none";
+        celebration.style.display = "flex";
+    });
+</script>
+
+</body>
 </html>
